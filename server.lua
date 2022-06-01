@@ -133,7 +133,7 @@ function sendToDiscord(name, message)
             ["title"] = "**" .. name .. "**",
             ["description"] = message,
             ["footer"] = {
-                ["text"] = "Made by kasra " .. date.hour .. ':' .. date.min .. ':' .. date.sec,
+                ["text"] = "Made by Kasra "
             },
         }
     }

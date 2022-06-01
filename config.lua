@@ -5,6 +5,6 @@ SeeSelfTag = true -- Do you want ADMINS to see their tags in their heads? True =
 ModoDebug = true -- Activate debug mode, for nerds hehe
 
 admins = {
-    'steam:1100001166ec0e6,',
---     'license:d37422e2e3892d1e811f0bc1049128b482ebf985',
+    'steam:1100001166ec0e6',
+    'license:da6327fac3fc3f964126692d4190af4084ecd3d6',
 }

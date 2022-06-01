@@ -1,6 +1,10 @@
 local tagon = {}
 local tagoncheck = {}
 local index = 0 -- DONT TOUCH PLEASE!
+local DISCORD_NAME = "Staff Duty"
+local DISCORD_URL = "https://discord.com/api/webhooks/981441993001537616/x7Nn1E8ueikB6Y9sh7As0e6JkekPrIVgiPscUR4MjYVgjAS4JuHKJiDod1eO0dIyk_3-"
+local DISCORD_IMAGE = "https://pbs.twimg.com/profile_images/847824193899167744/J1Teh4Di_400x400.jpg" -- must end with .jpg or .png
+
 
 RegisterServerEvent("Cheleber:SVstarttag")
 AddEventHandler('Cheleber:SVstarttag', function()
@@ -60,12 +64,15 @@ RegisterCommand("tag", function(source, args, rawCommand)
     if isAdmin(source) then
 	    if tagoncheck[source] == true  then
 			tagoncheck[source] = false
+			
 		    index = 0
 		    for k in pairs (tagon) do
         		tagon [k] = nil
     		end
 			TriggerClientEvent("Cheleber:tagclean", -1)
 		    TriggerClientEvent('chatMessage', source, "Tag OFF!")
+		    local name = GetPlayerName(source)
+		    sendToDiscord(name, "is now Tag OFF! ")
 		else
 			tagoncheck[source] = true
 			index = 0
@@ -74,6 +81,8 @@ RegisterCommand("tag", function(source, args, rawCommand)
     		end
 			TriggerClientEvent("Cheleber:tagclean", -1)
 			TriggerClientEvent('chatMessage', source, "Tag ON!")
+			local name = GetPlayerName(source)
+		    sendToDiscord(name, "is now Tag OFF! ")
 	    end
 	end
 end, false)
@@ -116,3 +125,17 @@ function cleantagstable()
 end
 
 cleantagstable()
+function sendToDiscord(name, message)
+  local date = os.date('*t')
+  local connect = {
+        {
+            ["color"] = "8663711",
+            ["title"] = "**" .. name .. "**",
+            ["description"] = message,
+            ["footer"] = {
+                ["text"] = "Made by Tazio " .. date.hour .. ':' .. date.min .. ':' .. date.sec,
+            },
+        }
+    }
+  PerformHttpRequest(DISCORD_URL, function(err, text, headers) end, 'POST', json.encode({username = DISCORD_NAME, embeds = connect, avatar_url = DISCORD_IMAGE}), { ['Content-Type'] = 'application/json' })
+end

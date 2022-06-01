@@ -71,8 +71,10 @@ RegisterCommand("tag", function(source, args, rawCommand)
     		end
 			TriggerClientEvent("Cheleber:tagclean", -1)
 		    TriggerClientEvent('chatMessage', source, "Tag OFF!")
+	            local playerId = GetPlayerFromServerId(source)
+   		    local id = GetPlayerServerId(playerId)
 		    local name = GetPlayerName(source)
-		    sendToDiscord(name, "is now Tag OFF! ")
+		    sendToDiscord(name, id "is now Tag OFF! ")
 		else
 			tagoncheck[source] = true
 			index = 0
@@ -81,8 +83,10 @@ RegisterCommand("tag", function(source, args, rawCommand)
     		end
 			TriggerClientEvent("Cheleber:tagclean", -1)
 			TriggerClientEvent('chatMessage', source, "Tag ON!")
-			local name = GetPlayerName(source)
-		    	sendToDiscord(name, "is now Tag ON! ")
+			    local playerId = GetPlayerFromServerId(source)
+			    local id = GetPlayerServerId(playerId)
+			    local name = GetPlayerName(source)
+		    	sendToDiscord(name,id "is now Tag ON! ")
 	    end
 	end
 end, false)
